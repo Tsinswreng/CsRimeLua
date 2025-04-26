@@ -1,9 +1,9 @@
 using System.Runtime.InteropServices;
-namespace CsRimeLua.Core.Lua;
+namespace CsRimeLua.Core.Lua_5_4;
 #pragma warning disable CS8981
 
-using TODO = Object;
-using LuaState = System.IntPtr;
+using TODO = nil;
+using LuaState = nint;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO luaL_addgsub(LuaState L, TODO x);

@@ -1,6 +1,6 @@
 namespace CsRimeLua.Core.Lua_5_4;
 using F = CsRimeLua.Core.Lua_5_4;
-unsafe public partial class LuaApiFn{
+unsafe public partial class LuaApi{
 
 #pragma warning disable CS8618
 public luaL_addgsub luaL_addgsub;

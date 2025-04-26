@@ -7,15 +7,15 @@ unsafe public partial class DllLoader{
 	protected static DllLoader? _Inst = null;
 	public static DllLoader Inst => _Inst??= new DllLoader();
 
-	public static LuaApiFn GetLuaApi(){
+	public static LuaApi GetLuaApi(){
 		return DllLoader.Inst.Load();
 	}
 
 	public str DllPath{get;set;} ="";
-	public LuaApiFn FnPtr{get;set;}
+	public LuaApi FnPtr{get;set;}
 	public nint DllPtr{get;set;}
 	public bool IsLoaded{get;protected set;}=false;
-	public LuaApiFn Load(){
+	public LuaApi Load(){
 		if(IsLoaded){
 			return FnPtr;
 		}
@@ -24,7 +24,7 @@ unsafe public partial class DllLoader{
 			//TODO
 			throw new Exception("Failed to load dll");
 		}
-		FnPtr = new LuaApiFn(DllPtr);
+		FnPtr = new LuaApi(DllPtr);
 		IsLoaded = true;
 		return FnPtr;
 	}

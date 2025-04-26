@@ -56,7 +56,6 @@ public lua_callk lua_callk;
 public lua_checkstack lua_checkstack;
 public lua_close lua_close;
 public lua_closeslot lua_closeslot;
-public lua_closethread lua_closethread;
 public lua_compare lua_compare;
 public lua_concat lua_concat;
 public lua_copy lua_copy;

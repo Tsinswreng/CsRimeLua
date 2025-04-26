@@ -26,7 +26,7 @@ unsafe public delegate TODO luaL_checkany(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO luaL_checkinteger(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO luaL_checklstring(LuaState L, TODO x);
+unsafe public delegate i32 luaL_checklstring(LuaState L, i32 index, UIntPtr* len);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO luaL_checknumber(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -112,8 +112,6 @@ unsafe public delegate TODO lua_close(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_closeslot(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_closethread(LuaState L, TODO x);
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_compare(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_concat(LuaState L, TODO x);
@@ -190,7 +188,7 @@ unsafe public delegate TODO lua_pushcclosure(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushfstring(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_pushinteger(LuaState L, TODO x);
+unsafe public delegate void lua_pushinteger(LuaState L, i64 n);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushlightuserdata(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -200,7 +198,7 @@ unsafe public delegate TODO lua_pushnil(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushnumber(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_pushstring(LuaState L, TODO x);
+unsafe public delegate void lua_pushstring(LuaState L, u8* s);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushthread(LuaState L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

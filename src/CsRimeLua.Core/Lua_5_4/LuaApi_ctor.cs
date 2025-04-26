@@ -70,7 +70,6 @@ _Init(ref z.lua_callk, nameof(lua_callk));
 _Init(ref z.lua_checkstack, nameof(lua_checkstack));
 _Init(ref z.lua_close, nameof(lua_close));
 _Init(ref z.lua_closeslot, nameof(lua_closeslot));
-_Init(ref z.lua_closethread, nameof(lua_closethread));
 _Init(ref z.lua_compare, nameof(lua_compare));
 _Init(ref z.lua_concat, nameof(lua_concat));
 _Init(ref z.lua_copy, nameof(lua_copy));

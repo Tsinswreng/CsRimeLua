@@ -3,5 +3,5 @@
 	<ItemGroup>
 		<ProjectReference Include="../CsShared/CsShared.csproj" />
 	</ItemGroup>
-
+  
 </Project>

@@ -1,8 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<PropertyGroup>
+		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
+	</PropertyGroup>
+
 
 	<ItemGroup>
 		<ProjectReference Include="../CsRimeLua.Core/CsRimeLua.Core.csproj"/>
+		<ProjectReference Include="../CsRimeLua.Exports/CsRimeLua.Exports.csproj"/>
 		<ProjectReference Include="../CsShared/CsShared.csproj" />
 	</ItemGroup>
 

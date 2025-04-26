@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 namespace CsShared.Interop;
-public static class FnPtrExt{
-	public static TDelegate asFn<TDelegate>(this nint z){
+public static class Extn_FnPtr{
+	public static TDelegate AsFn<TDelegate>(this nint z){
 		if(z == nint.Zero){
 			return default;
 		}

@@ -8,7 +8,7 @@ namespace CsShared.Interop;
 /// </summary>
 public static unsafe class CStrUtil{
 
-	public static string? cStrToCsStr(byte* cStr){
+	public static string? CStrToCsStr(byte* cStr){
 
 		if (cStr == null){ return null;}
 
@@ -27,7 +27,7 @@ public static unsafe class CStrUtil{
 	}
 
 
-	public static byte* csStrToCStr(string? csStr){
+	public static byte* CsStrToCStr(string? csStr){
 		if (csStr == null){ return null;}
 		return (byte*)Marshal.StringToCoTaskMemUTF8(csStr);
 		// if (csStr == null) {return null;}

@@ -6,9 +6,11 @@
 		<Nullable>enable</Nullable>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PublishAot>true</PublishAot>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Include="../CsShared/TypeAlias.cs" />
+		<!-- <ProjectReference Include="../CsShared/CsShared.csproj" /> -->
 	</ItemGroup>
 
 </Project>

@@ -1,11 +1,13 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using CsRimeLua.Core;
 using Lua_State = System.IntPtr;
 
 unsafe public partial class Export_Time{
 	[UnmanagedCallersOnly(EntryPoint = nameof(getUnixTimeMillis), CallConvs = new[] { typeof(CallConvCdecl) })]
 	public static int getUnixTimeMillis(Lua_State L){
+		var lua = DllLoader.GetLuaApi();
 		i64 ans = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 		lua_pushinteger(L, ans);
 		return 1;

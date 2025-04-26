@@ -2,14 +2,14 @@ namespace CsRimeLua.Core.Lua_5_4;
 using CsShared.Interop;
 using System.Runtime.InteropServices;
 
-unsafe public partial class LuaFn{
+unsafe public partial class LuaApiFn{
 	public IntPtr DllPtr{get;set;}
 	T_Fn _Init<T_Fn>(ref T_Fn Fn, str Name){
 		Fn = NativeLibrary.GetExport(DllPtr, Name).AsFn<T_Fn>();
 		return Fn;
 	}
 #pragma warning disable CS8618
-	public LuaFn(nint DllPtr){
+	public LuaApiFn(nint DllPtr){
 		var z = this;
 		z.DllPtr = DllPtr;
 		//z.lua_newstate = NativeLibrary.GetExport(DllPtr, "lua_newstate").AsFn<lua_newstate>();

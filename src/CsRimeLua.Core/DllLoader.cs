@@ -1,30 +1,32 @@
 using System.Runtime.InteropServices;
-using CsRimeLua.Core.Lua;
+using CsRimeLua.Core.Lua_5_4;
 using CsShared.Interop;
 namespace CsRimeLua.Core;
 
 unsafe public partial class DllLoader{
-	public str DllPath{get;set;} ="";
+	protected static DllLoader? _Inst = null;
+	public static DllLoader Inst => _Inst??= new DllLoader();
 
+	public static LuaFn GetFnPtr(){
+		return DllLoader.Inst.Load();
+	}
+
+	public str DllPath{get;set;} ="";
+	public LuaFn FnPtr{get;set;}
 	public nint DllPtr{get;set;}
-	public nil Load(){
+	public bool IsLoaded{get;protected set;}=false;
+	public LuaFn Load(){
+		if(IsLoaded){
+			return FnPtr;
+		}
 		DllPtr = NativeLibrary.Load(DllPath);
 		if(DllPtr == IntPtr.Zero){
-			return null!;
+			//TODO
+			throw new Exception("Failed to load dll");
 		}
-
-		return null!;
+		FnPtr = new LuaFn(DllPtr);
+		IsLoaded = true;
+		return FnPtr;
 	}
-
-
-	nil run(){
-		
-		return null;
-	}
-
-	nil l(){
-		return null!;
-	}
-
 
 }

@@ -15,7 +15,7 @@ unsafe public partial class Ext_Time{
 	public static i32 GetUnixTimeMs(Lua_State L){
 		var Lua = DllLoader.GetLuaApi();
 		i64 ans = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-		Lua.lua_pushinteger(L, ans); 
+		Lua.lua_pushinteger(L, ans);
 		return 1;
 	}
 

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<ProjectReference Include="../CsRimeLua.Core/CsRimeLua.Core.csproj"/>
+		<ProjectReference Include="../CsRimeLua.Exports/CsRimeLua.Exports.csproj"/>
+		<ProjectReference Include="../CsShared/CsShared.csproj" />
+	</ItemGroup>
+
+</Project>

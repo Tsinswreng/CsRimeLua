@@ -15,28 +15,37 @@ unsafe public partial class DllLoader{
 	}
 
 	public static LuaApi GetLuaApi(){
-		return DllLoader.Inst.Load();
+		var inst = DllLoader.Inst;
+		inst.Load();
+		return inst.LuaApi;
+	}
+	public static LuaSvc GetLuaSvc(){
+		var inst = DllLoader.Inst;
+		inst.Load();
+		return inst.LuaSvc;
 	}
 
 	public str DllPath{get;set;} = Environment.GetEnvironmentVariable(EnvVar.DLL_PATH)??"";
-	public LuaApi FnPtr{get;set;}
+	public LuaApi LuaApi{get;set;}
+	public LuaSvc LuaSvc{get;set;}
 	public nint DllPtr{get;set;}
 	public bool IsLoaded{get;protected set;}=false;
 	static nil Log(str Msg){
 		return Logger.Inst.Log(Msg);
 	}
-	public LuaApi Load(){
+	public nil Load(){
 		if(IsLoaded){
-			return FnPtr;
+			return null!;
 		}
 		try{
 			DllPtr = NativeLibrary.Load(DllPath);
 			if(DllPtr == IntPtr.Zero){
 				throw new Exception("Failed to load dll");
 			}
-			FnPtr = new LuaApi(DllPtr);
+			LuaApi = new LuaApi(DllPtr);
+			LuaSvc = new LuaSvc(LuaApi);
 			IsLoaded = true;
-			return FnPtr;
+			return null!;
 		}
 		catch (System.Exception e){
 			Log(e.ToString());

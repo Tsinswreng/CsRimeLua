@@ -9,7 +9,6 @@ using CsRimeLua.Core.Logger_;
 class Ext_Time {
 	[UnmanagedCallersOnly(EntryPoint = nameof(GetUnixTimeMs), CallConvs = new[] { typeof(CallConvCdecl) })]
 	public static i32 GetUnixTimeMs(Lua_State L){
-		Logger.Inst.Log("0");
 		return _.GetUnixTimeMs(L);
 	}
 
@@ -37,5 +36,5 @@ class Ext_Time {
 	public static i32 GetWeekOfYear(Lua_State L){
 		return _.GetWeekOfYear(L);
 	}
-} 
+}
 #endif

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
 	</PropertyGroup>
 

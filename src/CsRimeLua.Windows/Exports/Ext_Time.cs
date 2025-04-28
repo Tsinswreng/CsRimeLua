@@ -8,12 +8,12 @@ using _ = CsRimeLua.Exports.Time.Ext_Time;
 using CsRimeLua.Core.Logger_;
 class Ext_Time {
 	[UnmanagedCallersOnly(EntryPoint = nameof(GetUnixTimeMs), CallConvs = new[] { typeof(CallConvCdecl) })]
-	public static i32 GetUnixTimeMs(Lua_State L){
+	public static i32 GetUnixTimeMs(lua_State L){
 		return _.GetUnixTimeMs(L);
 	}
 
 	[UnmanagedCallersOnly(EntryPoint = nameof(GetWeekOfYear), CallConvs = new[] { typeof(CallConvCdecl) })]
-	public static i32 GetWeekOfYear(Lua_State L){
+	public static i32 GetWeekOfYear(lua_State L){
 		return _.GetWeekOfYear(L);
 	}
 }

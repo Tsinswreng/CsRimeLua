@@ -3,6 +3,9 @@ namespace CsRimeLua.Core.Logger_;
 public class Logger{
 	protected static Logger? _Inst = null;
 	public static Logger Inst => _Inst??= new Logger();
+	public static nil Log_(str msg){
+		return Inst.Log(msg);
+	}
 
 	public str Path = "./CsRimeLua.log";
 	public nil Log(str msg){

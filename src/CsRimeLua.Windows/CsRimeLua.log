@@ -1,0 +1,5 @@
+2025/4/28 16:05:39	DllPathFromEnv: 
+2025/4/28 16:05:39	System.BadImageFormatException: Format of the executable (.exe) or library (.dll) is invalid.
+   at System.Runtime.InteropServices.NativeLibrary.LoadLibErrorTracker.Throw(String) + 0x70
+   at System.Runtime.InteropServices.NativeLibrary.LoadFromPath(String, Boolean) + 0x43
+   at CsRimeLua.Core.DllLoader.Load() + 0x22

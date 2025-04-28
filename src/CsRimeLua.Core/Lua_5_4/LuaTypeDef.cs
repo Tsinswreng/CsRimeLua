@@ -12,7 +12,7 @@ namespace CsRimeLua.Core.Lua_5_4;
 /// <returns></returns>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate i32 lua_KFunction(
-	Lua_State L
+	lua_State L
 	,i32 status
 	,lua_KContext ctx
 );

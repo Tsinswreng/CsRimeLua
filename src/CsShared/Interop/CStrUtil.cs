@@ -6,9 +6,9 @@ namespace CsShared.Interop;
 /// <summary>
 /// TODO test
 /// </summary>
-public static unsafe class CStrUtil{
+public static unsafe class CStr{
 
-	public static string? CStrToCsStr(byte* cStr){
+	public static string? ToCsStr(byte* cStr){
 
 		if (cStr == null){ return null;}
 
@@ -27,21 +27,9 @@ public static unsafe class CStrUtil{
 	}
 
 
-	public static byte* CsStrToCStr(string? csStr){
+	public static byte* ToCStr(string? csStr){
 		if (csStr == null){ return null;}
 		return (byte*)Marshal.StringToCoTaskMemUTF8(csStr);
-		// if (csStr == null) {return null;}
-		// // 將字符串轉換為byte[]
-		// byte[] byteArray = Encoding.UTF8.GetBytes(csStr);
-		// // 分配內存來存儲byteArray + null結束符
-		// byte* cStr = (byte*)Marshal.AllocHGlobal(byteArray.Length + 1);
-		// // 複製byteArray到cStr
-		// for (int i = 0; i < byteArray.Length; i++){
-		// 	*(cStr + i) = byteArray[i];
-		// }
-		// // 添加null結束符
-		// *(cStr + byteArray.Length) = 0;
-		// return cStr;
 	}
 
 }

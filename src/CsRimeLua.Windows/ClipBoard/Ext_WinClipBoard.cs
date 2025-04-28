@@ -7,24 +7,24 @@ namespace CsRimeLua.Windows.ClipBoard;
 
 unsafe public partial class Ext_WinClipBoard{
 	//[UnmanagedCallersOnly(EntryPoint = nameof(ReadClipBoard_Win), CallConvs = new[] { typeof(CallConvCdecl) })]
-	public static i32 ReadClipBoard_Win(Lua_State L){
+	public static i32 ReadClipBoard_Win(lua_State L){
 		var Lua = DllLoader.GetLuaApi();
 		var text = WinClipBoard.GetText()??"";
-		byte* cStr = CStrUtil.CsStrToCStr(text);
+		byte* cStr = CStr.ToCStr(text);
 		Lua.lua_pushstring(L, cStr);
 		Marshal.FreeHGlobal((IntPtr)cStr);
 		return 1;
 	}
 
 	//[UnmanagedCallersOnly(EntryPoint = nameof(WriteClipBoard_Win), CallConvs = new[] { typeof(CallConvCdecl) })]
-	public static i32 WriteClipBoard_Win(Lua_State L){
+	public static i32 WriteClipBoard_Win(lua_State L){
 		var Lua = DllLoader.GetLuaApi();
 		UIntPtr len = 0;
 		var cStr = (u8*)Lua.luaL_checklstring(L, 1, &len);
 		if(cStr == null){
 			return 0;
 		}
-		var text = CStrUtil.CStrToCsStr(cStr);
+		var text = CStr.ToCsStr(cStr);
 		if(text != null){
 			WinClipBoard.SetText(text);
 		}

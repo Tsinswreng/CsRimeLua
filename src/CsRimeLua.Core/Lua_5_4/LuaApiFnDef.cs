@@ -160,7 +160,7 @@ unsafe public delegate TODO lua_atpanic(lua_State L, TODO x);
 /// This function behaves exactly like lua_call, but allows the called function to yield (see §4.5).
 /// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_callk(
+unsafe public delegate void lua_callk(
 	lua_State L
 	,i32 nargs
 	,i32 nresults
@@ -212,8 +212,13 @@ unsafe public delegate TODO lua_getallocf(lua_State L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate i32 lua_getfield(lua_State L, i32 index, u8* k);
 
+/// <summary>
+/// int lua_getglobal (lua_State *L, const char *name);
+/// Pushes onto the stack the value of the global name. Returns the type of that value.
+/// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_getglobal(lua_State L, TODO x);
+unsafe public delegate i32 lua_getglobal(lua_State L, u8* name);
+
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_gethook(lua_State L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -270,8 +275,15 @@ unsafe public delegate TODO lua_load(lua_State L, TODO x);
 unsafe public delegate TODO lua_newstate(lua_State L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_newthread(lua_State L, TODO x);
+/// <summary>
+/// void *lua_newuserdatauv (lua_State *L, size_t size, int nuvalue);
+/// This function creates and pushes on the stack a new full userdata, with nuvalue associated Lua values, called user values, plus an associated block of raw memory with size bytes. (The user values can be set and read with the functions lua_setiuservalue and lua_getiuservalue.)
+/// 
+/// The function returns the address of the block of memory. Lua ensures that this address is valid as long as the corresponding userdata is alive (see §2.5). Moreover, if the userdata is marked for finalization (see §2.5.3), its address is valid at least until the call to its finalizer.
+/// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_newuserdatauv(lua_State L, TODO x);
+unsafe public delegate IntPtr lua_newuserdatauv(lua_State L, size_t size, i32 nuvalue);
+
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_next(lua_State L, TODO x);
 
@@ -309,16 +321,25 @@ unsafe public delegate void lua_pushinteger(lua_State L, i64 n);
 unsafe public delegate TODO lua_pushlightuserdata(lua_State L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushlstring(lua_State L, TODO x);
+
+/// <summary>
+/// void lua_pushnil (lua_State *L);
+/// Pushes a nil value onto the stack.
+/// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_pushnil(lua_State L, TODO x);
+unsafe public delegate void lua_pushnil(lua_State L);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushnumber(lua_State L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate void lua_pushstring(lua_State L, u8* s);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushthread(lua_State L, TODO x);
+/// <summary>
+/// void lua_pushvalue (lua_State *L, int index);
+/// Pushes a copy of the element at the given index onto the stack.
+/// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_pushvalue(lua_State L, TODO x);
+unsafe public delegate void lua_pushvalue(lua_State L, i32 index);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_pushvfstring(lua_State L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -402,8 +423,19 @@ unsafe public delegate TODO lua_tocfunction(lua_State L, TODO x);
 unsafe public delegate TODO lua_toclose(lua_State L, TODO x);
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_tointegerx(lua_State L, TODO x);
+
+/// <summary>
+/// const char *lua_tolstring (lua_State *L, int index, size_t *len);
+/// Converts the Lua value at the given index to a C string. If len is not NULL, it sets *len with the string length. The Lua value must be a string or a number; otherwise, the function returns NULL. If the value is a number, then lua_tolstring also changes the actual value in the stack to a string. (This change confuses lua_next when lua_tolstring is applied to keys during a table traversal.)
+/// 
+/// lua_tolstring returns a pointer to a string inside the Lua state (see §4.1.3). This string always has a zero ('\0') after its last character (as in C), but can contain other zeros in its body.
+/// 
+/// This function can raise memory errors only when converting a number to a string (as then it may create a new string).
+/// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-unsafe public delegate TODO lua_tolstring(lua_State L, TODO x);
+unsafe public delegate u8* lua_tolstring(lua_State L, i32 index, size_t* len);
+
+
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate TODO lua_tonumberx(lua_State L, TODO x);
 

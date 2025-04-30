@@ -5,6 +5,7 @@ using CsRimeLua.Core;
 using CsRimeLua.Core.Logger_;
 using CsRimeLua.Core.Lua_5_4;
 using CsShared.Interop;
+using CsShared.Interop.Extn;
 using Lua_State = System.IntPtr;
 unsafe static class Ext__G{
 

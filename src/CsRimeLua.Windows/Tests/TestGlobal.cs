@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using CsRimeLua.Core;
 using CsRimeLua.Core.Logger_;
 using CsShared.Interop;
+using CsShared.Interop.Extn;
 unsafe class TestGlobal{
 	static i32 i = 0;//L_ogger.Log_((i++).ToString());
 	[UnmanagedCallersOnly(EntryPoint = nameof(Test), CallConvs = new[] { typeof(CallConvCdecl) })]
@@ -12,15 +13,25 @@ unsafe class TestGlobal{
 		i=0;
 		var svc = DllLoader.GetLuaSvc();
 		var api = svc.Api;
+		//ReadOnlySpan<byte> cStr = "hello\0"u8;
+		
+		
 		try{
 			u8* input_c = api.lua_tolstring(L, 1, null);
 			IntPtr segment = api.lua_touserdata(L, 2);
 			IntPtr env = api.lua_touserdata(L, 3);
-			api.lua_getglobal(L, "log".CStr()); //全局log入棧
-			api.lua_getfield(L, -1, "warning".CStr());//stack[-1](即log)入棧。-1潙棧頂
-			//api.lua_pushvalue(L, -2);//+不需要self參數
-			//api.lua_getfield(L, -2, "name_space".CStr());//-
-			api.lua_pushstring(L, "殺殺殺殺殺殺殺".CStr());//參數1
+
+			
+			
+			fixed(u8* str = "log\0"u8){
+				api.lua_getglobal(L, str); //全局log入棧
+			}
+			fixed(u8* s = "warning\0"u8){
+				api.lua_getfield(L, -1, s);//stack[-1](即log)入棧。-1潙棧頂
+			}
+			fixed(u8* str = "殺殺殺殺殺殺殺\0"u8){
+				api.lua_pushstring(L, str);//參數1
+			}
 			svc.MacroFn.lua_call(L, 1, 0); // 1個參數，0個返回值
 			str? input = CStr.ToCsStr(input_c);
 			if(input == "??"){
@@ -36,9 +47,9 @@ unsafe class TestGlobal{
 				api.lua_getglobal(L, "yield".CStr());
 				api.lua_pushvalue(L, -2);
 				svc.MacroFn.lua_call(L, 1, 0);
-				api.lua_pushnil(L);
-				api.lua_pushnil(L);
 			}
+			api.lua_pushnil(L);
+			api.lua_pushnil(L);
 		}
 		catch (System.Exception e){
 			Logger.Log_(e.ToString());

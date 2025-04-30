@@ -1,5 +1,5 @@
 namespace CsRimeLua.Core.Lua_5_4;
-using CsShared.Interop;
+using CsShared.Interop.Extn;
 using System.Runtime.InteropServices;
 
 unsafe public partial class LuaApi{

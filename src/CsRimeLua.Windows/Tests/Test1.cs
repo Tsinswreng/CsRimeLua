@@ -25,7 +25,7 @@ unsafe static class Ext__G{
 			var type = api.lua_getfield(L, -1, "a".CStr());
 			if(type == LuaConsts.LUA_TSTRING){
 				var cStr = api.lua_tolstring(L, -1, null);
-				var str = CStr.ToCsStr(cStr);
+				var str = CStrUtil.ToCsStr(cStr);
 				Logger.Log_(str);
 			}
 			svc.MacroFn.lua_pop(L, 1);

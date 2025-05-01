@@ -10,7 +10,7 @@ unsafe public partial class Ext_WinClipBoard{
 	public static i32 ReadClipBoard_Win(lua_State L){
 		var Lua = DllLoader.GetLuaApi();
 		var text = WinClipBoard.GetText()??"";
-		byte* cStr = CStr.ToCStr(text);
+		byte* cStr = CStrUtil.ToCStr(text);
 		Lua.lua_pushstring(L, cStr);
 		Marshal.FreeHGlobal((IntPtr)cStr);
 		return 1;
@@ -24,7 +24,7 @@ unsafe public partial class Ext_WinClipBoard{
 		if(cStr == null){
 			return 0;
 		}
-		var text = CStr.ToCsStr(cStr);
+		var text = CStrUtil.ToCsStr(cStr);
 		if(text != null){
 			WinClipBoard.SetText(text);
 		}

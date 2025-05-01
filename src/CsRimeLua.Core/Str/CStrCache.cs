@@ -1,4 +1,3 @@
-using System.Text;
 using CsShared.Interop;
 
 namespace CsRimeLua.Core.Str;
@@ -16,8 +15,7 @@ unsafe public class CStrCache{
 		if(CsStr_CStr.ContainsKey(CsStr)){
 			return CsStr_CStr[CsStr];
 		}
-		
-		var cStr = (IntPtr)CsStr.CStr();
+		var cStr = (IntPtr)CStrUtil.ToCStr(CsStr);
 		CsStr_CStr[CsStr] = cStr;
 		return cStr;
 	}
@@ -30,18 +28,17 @@ unsafe public class CStrCache{
 		if(CStr_CsStr.ContainsKey(intPtr)){
 			return CStr_CsStr[intPtr];
 		}
-		var CsStr = CStr.ToCsStr(cStr);
+		var CsStr = CStrUtil.ToCsStr(cStr);
 		CStr_CsStr[intPtr] = CsStr!;
 		return CsStr;
 	}
-}
 
-unsafe public static class Extn_CStrCache{
-	public static CStrCache CStrCache{get;} = CStrCache.Inst;
-	public static str? CsStr(u8* cStr){
-		return CStrCache.GetCsStr(cStr);
-	}
-	public static IntPtr CStr(this str CsStr){
-		return CStrCache.GetCStr(CsStr);
+	public void Delete(str CsStr){
+		if(!CsStr_CStr.ContainsKey(CsStr)){
+			return;
+		}
+		var cStr = (u8*)CsStr_CStr[CsStr];
+		PtrUtil.FreeEtNull(ref cStr);
+		CsStr_CStr.Remove(CsStr);
 	}
 }

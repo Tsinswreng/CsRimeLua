@@ -6,7 +6,7 @@ namespace CsShared.Interop;
 /// <summary>
 /// TODO test
 /// </summary>
-public static unsafe class CStr{
+public static unsafe class CStrUtil{
 
 	public static string? ToCsStr(byte* cStr){
 

@@ -431,6 +431,7 @@ unsafe public delegate TODO lua_tointegerx(lua_State L, TODO x);
 /// lua_tolstring returns a pointer to a string inside the Lua state (see §4.1.3). This string always has a zero ('\0') after its last character (as in C), but can contain other zeros in its body.
 /// 
 /// This function can raise memory errors only when converting a number to a string (as then it may create a new string).
+/// #勿手動釋放
 /// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate u8* lua_tolstring(lua_State L, i32 index, size_t* len);

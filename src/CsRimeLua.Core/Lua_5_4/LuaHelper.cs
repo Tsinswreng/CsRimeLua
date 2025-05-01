@@ -5,6 +5,14 @@ unsafe public class LuaHelper{
 	public LuaHelper(lua_State L) {
 		this.L = L;
 	}
+	public LuaSvc Svc{get;set;}
 
-	
+
+	LuaHelper F(ReadOnlySpan<u8> field){
+		fixed(u8* cStr = field){
+			Svc.Api.lua_getfield(L, -1, cStr);
+		}
+		return this;
+	}
+
 }

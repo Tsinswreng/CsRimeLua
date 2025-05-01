@@ -1,0 +1,47 @@
+<Project>
+  <PropertyGroup>
+    <!-- 定义NDK sysroot的ABI类型 -->
+    <_NdkSysrootAbi Condition=" '$(RuntimeIdentifier)' == 'linux-bionic-arm64' ">aarch64-linux-android</_NdkSysrootAbi>
+    <_NdkClangPrefix Condition=" '$(RuntimeIdentifier)' == 'linux-bionic-arm64' ">aarch64-linux-android21-</_NdkClangPrefix>
+    <_NdkPrebuiltAbi Condition=" '$(NETCoreSdkRuntimeIdentifier)' == 'osx-x64' ">darwin-x86_64</_NdkPrebuiltAbi>
+    <_NdkPrebuiltAbi Condition=" '$(NETCoreSdkRuntimeIdentifier)' == 'linux-x64' ">linux-x86_64</_NdkPrebuiltAbi>
+	<!-- <_NdkPrebuiltAbi>windows-x86_64</_NdkPrebuiltAbi> -->
+  <_NdkPrebuiltAbi>linux-x86_64</_NdkPrebuiltAbi>
+    <_NdkSysrootDir>$(ANDROID_NDK_HOME)/toolchains/llvm/prebuilt/$(_NdkPrebuiltAbi)/sysroot/usr/lib/$(_NdkSysrootAbi)</_NdkSysrootDir>
+    <_NdkBinDir>$(ANDROID_NDK_HOME)/toolchains/llvm/prebuilt/$(_NdkPrebuiltAbi)/bin</_NdkBinDir>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(RuntimeIdentifier.StartsWith('linux-bionic'))">
+    <CppCompilerAndLinker>$(_NdkBinDir)/$(_NdkClangPrefix)clang++</CppCompilerAndLinker>
+    <ObjCopyName>$(_NdkBinDir)/llvm-objcopy</ObjCopyName>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(RuntimeIdentifier.StartsWith('linux-bionic'))">
+    <LinkerArg Include="-Wl,--undefined-version" />
+  </ItemGroup>
+
+  <Target Name="_ValidateEnvironment"
+      BeforeTargets="Build">
+    <Error
+        Condition=" '$(ANDROID_NDK_HOME)' == '' Or !Exists($(ANDROID_NDK_HOME)) "
+        Text="Set the %24ANDROID_NDK_HOME environment variable to the path of the Android NDK."
+     />
+    <Error
+        Condition=" !Exists($(_NdkSysrootDir))"
+        Text="NDK 'sysroot' dir `$(_NdkSysrootDir)` does not exist. You're on your own."
+    />
+  </Target>
+
+  <Target Name="_CopyLibcppShared"
+      AfterTargets="Publish">
+    <PropertyGroup>
+      <_JniLibsDir>../Native/app/src/main/jniLibs/arm64-v8a</_JniLibsDir>
+    </PropertyGroup>
+    <MakeDir Directories="../Native/app/src/main/jniLibs/arm64-v8a" />
+    <ItemGroup>
+      <_Source Include="$(_NdkSysrootDir)\libc++_shared.so" />
+      <_Target Include="$(_JniLibsDir)\libc++_shared.so" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_Source)" DestinationFiles="@(_Target)" />
+  </Target>
+</Project>

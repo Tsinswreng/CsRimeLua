@@ -1,3 +1,5 @@
 _Note/
 bin/
 obj/
+
+*.so

@@ -13,7 +13,7 @@ unsafe public partial class Ext_Time{
 		return Logger.Inst.Log(Msg);
 	}
 	public static i32 GetUnixTimeMs(Lua_State L){
-		var Lua = DllLoader.GetLuaApi();
+		var Lua = LuaDll.GetLuaApi();
 		i64 ans = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 		Lua.lua_pushinteger(L, ans);
 		return 1;
@@ -21,7 +21,7 @@ unsafe public partial class Ext_Time{
 
 	//[UnmanagedCallersOnly(EntryPoint = nameof(GetWeekOfYear), CallConvs = new[] { typeof(CallConvCdecl) })]
 	public static i32 GetWeekOfYear(Lua_State L){
-		var Lua = DllLoader.GetLuaApi();
+		var Lua = LuaDll.GetLuaApi();
 		var today =  DateTime.Today;
 		var isoWeek = ISOWeek.GetWeekOfYear(today);
 		//var isoYear = ISOWeek.GetYear(today);

@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Runtime.InteropServices;
 using CsRimeLua.Core.Consts;
 using CsRimeLua.Core.Logger_;
@@ -5,22 +6,24 @@ using CsRimeLua.Core.Lua_5_4;
 using CsShared.Interop;
 namespace CsRimeLua.Core;
 
-unsafe public partial class DllLoader{
-	protected static DllLoader? _Inst = null;
-	public static DllLoader Inst => _Inst??= new DllLoader();
+unsafe public partial class LuaDll{
+	protected static LuaDll? _Inst = null;
+	public static LuaDll Inst => _Inst??= new LuaDll();
 
-	public DllLoader(){
-		Logger.Inst.Log("DllPathFromEnv: "+DllPath);
-		DllPath = "D:/ENV/Rime/weasel-0.15.0/rime.dll"; //TODO temp test
+	public LuaDll(){
+		// //Logger.Inst.Log("Assembly.GetExecutingAssembly().Location: "+Assembly.GetExecutingAssembly().Location); //無
+		// Logger.Log_("System.AppContext.BaseDirectory: "+System.AppContext.BaseDirectory); // D:\ENV\Rime\weasel-0.15.0\
+		// DllPath = "D:/ENV/Rime/weasel-0.15.0/rime.dll"; //TODO temp test
+		DllPath = "rime";
 	}
-
+	
 	public static LuaApi GetLuaApi(){
-		var inst = DllLoader.Inst;
+		var inst = LuaDll.Inst;
 		inst.Load();
 		return inst.LuaApi;
 	}
 	public static LuaSvc GetLuaSvc(){
-		var inst = DllLoader.Inst;
+		var inst = LuaDll.Inst;
 		inst.Load();
 		return inst.LuaSvc;
 	}

@@ -1,10 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RuntimeIdentifier>linux-bionic-arm64</RuntimeIdentifier>
+		<RuntimeIdentifier>android-arm64</RuntimeIdentifier>
+		<PublishAot>true</PublishAot>
+		<PublishAotUsingRuntimePack>true</PublishAotUsingRuntimePack>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- <AndroidNdkDirectory>$ANDROID_NDK_HOME</AndroidNdkDirectory> -->
+		<RestoreAdditionalProjectSources>https://aka.ms/skiasharp-eap/index.json</RestoreAdditionalProjectSources>
+	</PropertyGroup>
+
+
+	<!-- Trimmer switches -->
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<!-- From Android workload: https://github.com/xamarin/xamarin-android/blob/80ee320ed0bb245768ba436b76f9309aca18abc3/src/Xamarin.Android.Build.Tasks/Microsoft.Android.Sdk/targets/Microsoft.Android.Sdk.DefaultProperties.targets#L95-L110 -->
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<UseSystemResourceKeys>true</UseSystemResourceKeys>
+		<NullabilityInfoContextSupport>false</NullabilityInfoContextSupport>
+		<_AggressiveAttributeTrimming>true</_AggressiveAttributeTrimming>
+		<!-- From SmolSharp: https://github.com/ascpixi/smolsharp/blob/54a4aeb6e8f6cdd64d049862dee611301082e71b/src/SmolSharp.props#L48-L57 -->
+		<IlcDisableReflection>true</IlcDisableReflection>
+		<StackTraceSupport>false</StackTraceSupport>
+		<OptimizationPreference>Size</OptimizationPreference>
+	</PropertyGroup>
+
+
+
+	<ItemGroup>
+		<ProjectReference Include="../CsRimeLua.Core/CsRimeLua.Core.csproj"/>
+		<ProjectReference Include="../CsRimeLua.Exports/CsRimeLua.Exports.csproj"/>
+		<ProjectReference Include="../CsShared/CsShared.csproj" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<!-- <LinkerArg Include="-Wl,-soname,libdotnet.so" /> -->
+	</ItemGroup>
+
+	<!-- 引入自定义的构建目标文件libdotnet.targets，可能包含平台特定的编译或部署逻辑。 -->
+	<Import Project="libdotnet.targets" />
 
 </Project>

@@ -11,7 +11,7 @@ unsafe static class Ext__G{
 
 	//[UnmanagedCallersOnly(EntryPoint = nameof(Test), CallConvs = new[] { typeof(CallConvCdecl) })]
 	public static i32 Test(lua_State L){
-		var svc= DllLoader.GetLuaSvc();
+		var svc= LuaDll.GetLuaSvc();
 		var api = svc.Api;
 		string? errMsg = null;
 		do{

@@ -11,3 +11,8 @@ global using f32 = System.Single;
 global using f64 = System.Double;
 global using str = System.String;
 global using nil = System.Object;
+
+global using static Nil_;
+public struct Nil_{
+	public const nil Nil = null!;
+}

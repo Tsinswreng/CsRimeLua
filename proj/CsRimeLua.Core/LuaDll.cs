@@ -14,7 +14,9 @@ unsafe public partial class LuaDll{
 		// //Logger.Inst.Log("Assembly.GetExecutingAssembly().Location: "+Assembly.GetExecutingAssembly().Location); //無
 		// Logger.Log_("System.AppContext.BaseDirectory: "+System.AppContext.BaseDirectory); // D:\ENV\Rime\weasel-0.15.0\
 		// DllPath = "D:/ENV/Rime/weasel-0.15.0/rime.dll"; //TODO temp test
+		Logger.Log_(">LuaDll.ctor");
 		DllPath = "rime";
+		Logger.Log_("<LuaDll.ctor");
 	}
 	
 	public static LuaApi GetLuaApi(){
@@ -40,6 +42,7 @@ unsafe public partial class LuaDll{
 		if(IsLoaded){
 			return null!;
 		}
+		Log("Init Load");
 		try{
 			DllPtr = NativeLibrary.Load(DllPath);
 			if(DllPtr == IntPtr.Zero){

@@ -5,15 +5,15 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Android", "src\CsRimeLua.Android\CsRimeLua.Android.csproj", "{7BBB1C2A-B6B9-8D5E-E58E-604079A89780}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Android", "proj\CsRimeLua.Android\CsRimeLua.Android.csproj", "{7BBB1C2A-B6B9-8D5E-E58E-604079A89780}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Core", "src\CsRimeLua.Core\CsRimeLua.Core.csproj", "{EB99C201-47E6-7AD9-7D53-4C9BDE7A70A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Core", "proj\CsRimeLua.Core\CsRimeLua.Core.csproj", "{EB99C201-47E6-7AD9-7D53-4C9BDE7A70A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Windows", "src\CsRimeLua.Windows\CsRimeLua.Windows.csproj", "{AFAFDD2A-FF41-9404-6EC8-88B6CA3CAE09}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Windows", "proj\CsRimeLua.Windows\CsRimeLua.Windows.csproj", "{AFAFDD2A-FF41-9404-6EC8-88B6CA3CAE09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsShared", "src\CsShared\CsShared.csproj", "{CEB5D494-2C0E-4A9B-9A92-D5BC85668F03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsShared", "proj\CsShared\CsShared.csproj", "{CEB5D494-2C0E-4A9B-9A92-D5BC85668F03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Exports", "src\CsRimeLua.Exports\CsRimeLua.Exports.csproj", "{7A79B345-4CD3-40E9-AF91-60D657F14D92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsRimeLua.Exports", "proj\CsRimeLua.Exports\CsRimeLua.Exports.csproj", "{7A79B345-4CD3-40E9-AF91-60D657F14D92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
